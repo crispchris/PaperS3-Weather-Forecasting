@@ -3,15 +3,16 @@
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include <time.h>
+#include <SD.h>
 
 // ==== CONFIG ====
-const char* ssid     = "your-wifi";
-const char* password = "your-wifi-password";
+const char* ssid     = "wifi";
+const char* password = "pw";
 const char* city     = "Valparaiso,CL";
-const char* apiKey   = "openweatherapikey";
+const char* apiKey   = "key";
 const char* units    = "metric";
-bool useDeepSleep    = false;
-int  sleepMinutes    = 1;
+bool useDeepSleep    = true;
+int  sleepMinutes    = 60;
 
 // ==== TIME ====
 const char* ntpServer = "pool.ntp.org";
@@ -124,7 +125,7 @@ void drawWeather() {
   M5.Display.setRotation(1);
   M5.Display.fillScreen(TFT_WHITE);
   M5.Display.setTextColor(TFT_BLACK, TFT_WHITE);
-  
+
   for (int i = 0; i < 3; i++) {
     M5.Display.setTextDatum(TL_DATUM);
     M5.Display.setTextSize(4);
@@ -135,18 +136,18 @@ void drawWeather() {
     M5.Display.setTextSize(8);
     M5.Display.setCursor(10, 60);
     M5.Display.printf("%s", e.c_str());
-    M5.Display.setTextSize(6);
+    M5.Display.setTextSize(8);
     M5.Display.setCursor(140, 80);
     M5.Display.printf("%.1f°C", temp);
 
-    M5.Display.setTextSize(2);
+    M5.Display.setTextSize(4);
     M5.Display.setCursor(10, 200);
     M5.Display.printf("%s | Feels %.1f°C | Hum %.0f%%", weatherDesc.c_str(), feels_like, humidity);
 
     int y = 230;
     M5.Display.drawLine(0, y, 320, y, TFT_BLACK);
     y += 10;
-    M5.Display.setTextSize(2);
+    M5.Display.setTextSize(4);
     for (int i=0;i<3;i++) {
       String em = emoji(forecast[i].icon);
       M5.Display.setCursor(10, y);
@@ -158,7 +159,7 @@ void drawWeather() {
     if (getLocalTime(&now)) {
       char buf[32];
       strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M", &now);
-      M5.Display.setTextSize(1);
+      M5.Display.setTextSize(2);
       M5.Display.setCursor(10, y+10);
       M5.Display.printf("Updated: %s", buf);
     }
@@ -175,11 +176,10 @@ void setup() {
   Serial.begin(115200);
   Serial.println("\n=== PaperS3 Weather ===");
 
-  auto cfg = M5.config(); 
+  auto cfg = M5.config();
   cfg.output_power = true;
-  M5.begin(cfg);
+  M5.begin(cfg);  
   M5.Power.begin();
-  //M5.Power.setPowerBoostKeepOn(true);
 
   M5.Display.wakeup();
   M5.Display.setEpdMode(epd_mode_t::epd_quality);
