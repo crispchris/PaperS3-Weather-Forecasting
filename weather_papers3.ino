@@ -118,7 +118,7 @@ void drawIcon(String icon, int centerX, int centerY, int boxW, int boxH) {
   int drawH = h * scale;
   int x = centerX - drawW/2;
   int y = centerY - drawH/2;
-  M5.Lcd.drawBmpFile(SPIFFS, path.c_str(), x, y, drawW, drawH);
+  M5.Lcd.drawBmpFile(path.c_str(), x, y, drawW, drawH);
 }
 
 // ==== DRAW UI ====
