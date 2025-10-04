@@ -35,9 +35,9 @@ Includes a **Wi‑Fi configuration web portal** and **icon auto‑scaling**.
 
 ### Install Environment
 1. In *File → Preferences*, add  
-   `https://espressif.github.io/arduino-esp32/package_esp32_index.json`
-2. Install **ESP32** in *Tools → Board Manager*.
-3. Install libraries:  
+   `https://static-cdn.m5stack.com/resource/arduino/package_m5stack_index.json`
+3. Install **ESP32** in *Tools → Board Manager*.
+4. Install libraries:  
    `M5Unified`, `M5GFX`, `ArduinoJson`, `WiFiManager`.
 
 ### Board Settings
