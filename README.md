@@ -4,7 +4,7 @@
 A minimalist e‑ink weather dashboard for the **M5Stack PaperS3**.  
 Fetches the current weather and a 3‑day forecast from **OpenWeatherMap**, draws simple built‑in monochrome icons, and updates on a configurable schedule using deep sleep for power efficiency.
 
----
+![PaperS3 Weather Example](example_screen.jpg)
 
 ## ✨ Features
 
@@ -109,9 +109,3 @@ int  sleepMinutes    = 60;
 ## 📜 License
 
 MIT © 2025.
-
----
-
-## 📸 Screenshot
-
-![PaperS3 Weather Example](example_screen.jpg)
